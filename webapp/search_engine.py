@@ -74,14 +74,14 @@ def init_search_engine():
     with open(input_path / 'test.content_token', 'r') as f:
         test_raw = f.readlines()
 
-    vocab = lang_model_utils.load_lm_vocab('./data/stackoverflow/lang_model/vocab.cls')
+    vocab = lang_model_utils.load_lm_vocab('../notebooks/data/stackoverflow/lang_model/vocab.cls')
     lang_model = torch.load('./data/stackoverflow/lang_model/lang_model_cpu.torch',
                             map_location=lambda storage, loc: storage)
     q2emb = lang_model_utils.Query2Emb(lang_model = lang_model.cpu(),
                   vocab = vocab)
 
     search_index = nmslib.init(method='hnsw', space='cosinesimil')
-    search_index.loadIndex('./data/stackoverflow/lang_model_emb/dim500_avg_searchindex.nmslib')
+    search_index.loadIndex('../notebooks/data/stackoverflow/lang_model_emb/dim500_avg_searchindex.nmslib')
 
     se = search_engine(nmslib_index=search_index,
                        ref_df=ref_df,
