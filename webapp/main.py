@@ -41,10 +41,11 @@ def search(se, ref_df, query):
         polarity = ref_df.iloc[idx].sentiment_polarity
         subjectivity = ref_df.iloc[idx].sentiment_subjectivity
         score = dist + 0.01 / vote + 0.001 / polarity
-        results = results + content + '\n'
-        results = results + f'score: {score}\n'
-        results = results + f'url: <p><a href="{url}">{url}</a></p>\n---------------\n'
-
+        results = results + f'{content}<br>'
+        results = results +f'score: {round(score, 6)}<br>'
+        results = results + f'url: <a href="{url}">{url}</a><br>'
+        results = results + '<p>---------------</p>'
+        
         print(content)
         print(f'score: {score}')
         print(f'url: {url}\n---------------\n')
