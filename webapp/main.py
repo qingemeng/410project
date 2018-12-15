@@ -77,7 +77,7 @@ def retrieve():
             {table}
         </body>
         </html>
-        '''.format(table=table, css_file= url_for('static'))
+        '''.format(table=table)
     return render_template_string(search_template)
 
 
