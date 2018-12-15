@@ -31,7 +31,7 @@ def rank(input, ref_df):
 
 
 def search(se, ref_df, query):
-    results = []
+    results = ""
     idxs, dists = se.search(query)
     ranked_results = sorted(zip(idxs, dists), key=lambda input: rank(input, ref_df))
     for idx, dist in ranked_results[:100]:
@@ -41,7 +41,10 @@ def search(se, ref_df, query):
         polarity = ref_df.iloc[idx].sentiment_polarity
         subjectivity = ref_df.iloc[idx].sentiment_subjectivity
         score = dist + 0.01 / vote + 0.001 / polarity
-        results.append({'content': content, 'score': score, 'url': url})
+        results = results + content + '\n'
+        results = results + f'score: {score}\n'
+        results = results + f'url: <p><a href="{url}">{url}</a></p>\n---------------\n'
+
         print(content)
         print(f'score: {score}')
         print(f'url: {url}\n---------------\n')
@@ -58,10 +61,10 @@ def hello():
 @app.route('/search')
 def retrieve():
     query_string = request.args.get('query')
-    table = ''
+    results = ''
     if query_string:
         results = search(search_engine, ref_df, query_string)
-        table = json2html.convert(json=results)
+
 
     search_template = '''
         <html lang="en">
@@ -76,11 +79,11 @@ def retrieve():
                     <input type="text" name="query">
                     <input type="submit">
                 </form>
-                {table}
+                {results}
             </div>
         </body>
         </html>
-        '''.format(table=table, css_file= url_for('static', filename='style.css'))
+        '''.format(results=results, css_file= url_for('static', filename='style.css'))
     return render_template_string(search_template)
 
 
