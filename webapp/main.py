@@ -57,7 +57,7 @@ def hello():
 def retrieve():
     query_string = request.args.get('query_string')
     if not query_string:
-        render_template('index.html')
+        return render_template('index.html')
     results = search(search_engine, ref_df, query_string)
     # return render_template('index.html', text=request.form['text'])
     return jsonify(results)
