@@ -39,7 +39,7 @@ if __name__ == '__main__':
     import os
     if 'WINGDB_ACTIVE' in os.environ:
         app.debug = True
-    app.run(port=5001)
+    app.run(port=5001, host= '0.0.0.0')
         
 # =============================================================================
 # if __name__ == '__main__':
