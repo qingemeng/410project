@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # [START gae_python37_app]
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from search_engine import init_search_engine
 
 app = Flask(__name__)
@@ -56,9 +56,11 @@ def hello():
 @app.route('/search')
 def retrieve():
     query_string = request.args.get('query_string')
+    if not query_string:
+        render_template('index.html')
     results = search(search_engine, ref_df, query_string)
+    # return render_template('index.html', text=request.form['text'])
     return jsonify(results)
-
 
 if __name__ == '__main__':
     ref_df, search_engine = init_search_engine()
