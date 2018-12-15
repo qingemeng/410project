@@ -59,8 +59,7 @@ def retrieve():
     if not query_string:
         return render_template('index.html')
     results = search(search_engine, ref_df, query_string)
-    # return render_template('index.html', text=request.form['text'])
-    return jsonify(results)
+    return render_template('index.html', results)
 
 if __name__ == '__main__':
     ref_df, search_engine = init_search_engine()

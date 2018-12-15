@@ -11,9 +11,10 @@
     <input type="submit">
 </form>
 
-<!--{% if text %}-->
-<!--search: {{ text }}-->
-<!--{% endif %}-->
+{% if results %}
+    {{import json2html}}
+    {{json2html.convert(json = results) }}
+{% endif %}
 
 </body>
 </html>
