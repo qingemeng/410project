@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # [START gae_python37_app]
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from search_engine import init_search_engine
 
 app = Flask(__name__)
@@ -30,6 +30,7 @@ def rank(input, ref_df):
 
 
 def search(se, ref_df, query):
+    results = []
     idxs, dists = se.search(query)
     ranked_results = sorted(zip(idxs, dists), key=lambda input: rank(input, ref_df))
     for idx, dist in ranked_results[:10]:
@@ -39,10 +40,12 @@ def search(se, ref_df, query):
         polarity = ref_df.iloc[idx].sentiment_polarity
         subjectivity = ref_df.iloc[idx].sentiment_subjectivity
         score = dist + 0.01 / vote + 0.001 / polarity
+        results.append({'content': content, 'score': score, 'url': url})
         print(content)
         print(f'score: {score}')
         print(f'url: {url}\n---------------\n')
 
+    return results
 
 @app.route('/')
 def hello():
@@ -53,7 +56,8 @@ def hello():
 @app.route('/search')
 def retrieve():
     query_string = request.args.get('query_string')
-    search(search_engine, ref_df, query_string)
+    results = search(search_engine, ref_df, query_string)
+    return jsonify(results)
 
 
 if __name__ == '__main__':
