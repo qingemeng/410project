@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # [START gae_python37_app]
-from flask import Flask, request, render_template_string
+from flask import Flask, request, render_template_string, url_for
 from search_engine import init_search_engine
 from json2html import *
 
@@ -34,7 +34,7 @@ def search(se, ref_df, query):
     results = []
     idxs, dists = se.search(query)
     ranked_results = sorted(zip(idxs, dists), key=lambda input: rank(input, ref_df))
-    for idx, dist in ranked_results[:10]:
+    for idx, dist in ranked_results[:100]:
         content = ref_df.iloc[idx].content
         url = ref_df.iloc[idx].url
         vote = ref_df.iloc[idx].vote
@@ -70,12 +70,14 @@ def retrieve():
             <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
             <link rel=stylesheet type=text/css href="{css_file}">
         </head>
-        <body>    
-            <form method="get" action="/search">
-                <input type="text" name="query">
-                <input type="submit">
-            </form>
-            {table}
+        <body>   
+            <div class="content">
+                <form method="get" action="/search">
+                    <input type="text" name="query">
+                    <input type="submit">
+                </form>
+                {table}
+            </div>
         </body>
         </html>
         '''.format(table=table, css_file= url_for('static', filename='style.css'))
