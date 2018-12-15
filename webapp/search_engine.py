@@ -75,7 +75,7 @@ def init_search_engine():
         test_raw = f.readlines()
 
     vocab = lang_model_utils.load_lm_vocab('../notebooks/data/stackoverflow/lang_model/vocab.cls')
-    lang_model = torch.load('./data/stackoverflow/lang_model/lang_model_cpu.torch',
+    lang_model = torch.load('../notebooks/data/stackoverflow/lang_model/lang_model_cpu.torch',
                             map_location=lambda storage, loc: storage)
     q2emb = lang_model_utils.Query2Emb(lang_model = lang_model.cpu(),
                   vocab = vocab)
