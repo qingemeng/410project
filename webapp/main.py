@@ -55,7 +55,7 @@ def hello():
 
 @app.route('/search')
 def retrieve():
-    query_string = request.args.get('query_string')
+    query_string = request.form.get('query')
     if not query_string:
         return render_template('index.html')
     results = search(search_engine, ref_df, query_string)

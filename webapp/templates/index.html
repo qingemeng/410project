@@ -6,14 +6,14 @@
 </head>
 <body>
 
-<form action="/search" method="GET">
-    <input name="text">
-    <input type="submit" value="SEARCH">
+<form method="get" action="{ url_for('search') }}">
+    <input type="text" name="query">
+    <input type="submit">
 </form>
 
-{% if text %}
-search: {{ text }}
-{% endif %}
+<!--{% if text %}-->
+<!--search: {{ text }}-->
+<!--{% endif %}-->
 
 </body>
 </html>
