@@ -2,6 +2,7 @@ from pathlib import Path
 import pandas as pd
 import torch
 import numpy as np
+import nmslib
 from sklearn import preprocessing
 import sys, os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'notebooks'))
