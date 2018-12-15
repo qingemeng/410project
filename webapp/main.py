@@ -67,6 +67,7 @@ def retrieve():
         <html lang="en">
         <head>
             <meta charset="UTF-8">
+            <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         </head>
         <body>    
             <form method="get" action="/search">
@@ -76,7 +77,7 @@ def retrieve():
             {table}
         </body>
         </html>
-        '''.format(table=table)
+        '''.format(table=table, css_file= url_for('static'))
     return render_template_string(search_template)
 
 
