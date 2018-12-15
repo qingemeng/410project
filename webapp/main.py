@@ -13,8 +13,9 @@
 # limitations under the License.
 
 # [START gae_python37_app]
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, render_template_string
 from search_engine import init_search_engine
+from json2html import *
 
 app = Flask(__name__)
 ref_df = 'global'
@@ -47,6 +48,7 @@ def search(se, ref_df, query):
 
     return results
 
+
 @app.route('/')
 def hello():
     """Return a friendly HTTP greeting."""
@@ -56,10 +58,27 @@ def hello():
 @app.route('/search')
 def retrieve():
     query_string = request.args.get('query')
-    if not query_string:
-        return render_template('index.html')
-    results = search(search_engine, ref_df, query_string)
-    return render_template('index.html', results)
+    table = ''
+    if query_string:
+        results = search(search_engine, ref_df, query_string)
+        table = json2html.convert(json=results)
+
+    search_template = '''
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+        </head>
+        <body>    
+            <form method="get" action="/search">
+                <input type="text" name="query">
+                <input type="submit">
+            </form>
+            {table}
+        </body>
+        </html>
+        '''.format(table=table)
+    return render_template_string(search_template)
+
 
 if __name__ == '__main__':
     ref_df, search_engine = init_search_engine()
