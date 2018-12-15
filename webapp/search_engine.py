@@ -65,16 +65,6 @@ def init_search_engine():
     ref_df.vote = np.tanh(ref_df.vote)
     ref_df[['sentiment_polarity', 'sentiment_subjectivity']] = preprocessing.MinMaxScaler().fit_transform(ref_df[['sentiment_polarity', 'sentiment_subjectivity']])
 
-    # read data
-    with open(input_path / 'train.content_token', 'r') as f:
-        trn_raw = f.readlines()
-
-    with open(input_path / 'valid.content_token', 'r') as f:
-        val_raw = f.readlines()
-
-    with open(input_path / 'test.content_token', 'r') as f:
-        test_raw = f.readlines()
-
     vocab = lang_model_utils.load_lm_vocab('../notebooks/data/stackoverflow/lang_model/vocab.cls')
     lang_model = torch.load('../notebooks/data/stackoverflow/lang_model/lang_model_cpu.torch',
                             map_location=lambda storage, loc: storage)
@@ -88,4 +78,5 @@ def init_search_engine():
                        ref_df=ref_df,
                        query2emb_func=q2emb.emb_mean)
 
+    print("Search engine initialized!")
     return ref_df, se
