@@ -37,6 +37,8 @@ The details of each step are in-lined with each notebook
 We’ve trained a language model with a dataset(644466 rows)
 
 ## Code structure
+
+```
 .
 ├── notebooks (containing notebooks for process data, train language model, get embedding and build index, etc)
 │   ├── Get\ results.ipynb
@@ -56,5 +58,6 @@ We’ve trained a language model with a dataset(644466 rows)
     ├── main.py
     ├── search_engine.py
     └── static
+```
 
 
