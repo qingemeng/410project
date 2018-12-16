@@ -8,7 +8,7 @@ We use Flask framework for building this app.
 
 ## Preparing data/model/indices etc for the Application
 
-### Data: We are using the public data set on big query https://cloud.google.com/bigquery/public-data/stackoverflow
+#### Data: Public data set on big query https://cloud.google.com/bigquery/public-data/stackoverflow is used
 #### Preprocessing
 Stack overflow answer body, votes, comments as well as the url are retrieved and processed. We are using BigQuery to get the table, storing it on Google Cloud Storage, and export csv from there.
 
@@ -38,8 +38,23 @@ We’ve trained a language model with a dataset(644466 rows)
 
 ## Code structure
 .
-+-- webapp - flask app for web search engine app
-+-- notebooks - containing notebooks for process data, train language model, get embedding and build index, etc
-|   +-- utils
-|   +-- notebooks
-	
+├── notebooks (containing notebooks for process data, train language model, get embedding and build index, etc)
+│   ├── Get\ results.ipynb
+│   ├── Process\ stackoverflow\ data.ipynb
+│   ├── README.md
+│   ├── Train\ LM\ with\ stackoverflow.ipynb
+│   ├── general_utils.py
+│   ├── lang_model_utils.py
+│   ├── sentiment_analysis_utils.py
+│   └── seq2seq_utils.py
+├── requirements
+│   └── requirements.txt
+├── setup.sh
+├── vm-setup.md
+└── webapp (Flask application for the search engine)
+    ├── README.md
+    ├── main.py
+    ├── search_engine.py
+    └── static
+
+
