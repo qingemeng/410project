@@ -59,5 +59,10 @@ We’ve trained a language model with a dataset(644466 rows)
     ├── search_engine.py
     └── static
 ```
+Team members:
+Gemeng Qin(gemengq2, gemengq2@illinois.edu) - project coordinator
+Chao Zhu (chaoz3, chaoz3@illinois.edu )
 
-
+Project contribution: 
+Gemeng Qin: Data processing and cleaning, model training, building index and retrieving data and infrastructure
+Chao Zhu: Web Application for the search engine and presentation.
