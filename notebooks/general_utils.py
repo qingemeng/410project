@@ -102,7 +102,7 @@ processed_data_filenames = [
 'https://storage.googleapis.com/kubeflow-examples/code_search/data/without_docstrings_original_function.json.gz']
 
 
-def get_step2_prerequisite_files(output_directory):
+def get_processed_data(output_directory):
     outpath = Path(output_directory)
     assert not list(outpath.glob('*')), f'There are files in {str(outpath.absolute())}, please clear files or specify an empty folder.'
     outpath.mkdir(exist_ok=True)
