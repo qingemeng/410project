@@ -70,3 +70,6 @@ Chao Zhu (chaoz3, chaoz3@illinois.edu )
 Gemeng Qin: Data processing and cleaning, model training, building index and retrieving data and infrastructure
 
 Chao Zhu: Web Application for the search engine and presentation.
+
+**Project presentation**:
+https://youtu.be/NFtCr5dBX4Q
